@@ -2,6 +2,7 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import org.apache.log4j.Logger;
 
 public class Server {
     public static void main(String[] args) {

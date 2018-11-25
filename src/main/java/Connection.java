@@ -1,13 +1,14 @@
-
-
 import java.io.*;
 import java.net.Socket;
+import org.apache.log4j.Logger;
 
 public class Connection implements Runnable {
 
     Socket socket;
 
     Chat chat;
+
+    private static final Logger log = Logger.getLogger(Connection.class);
 
     public Connection (Socket socket, Chat chat) {
         this.socket = socket;
@@ -22,8 +23,6 @@ public class Connection implements Runnable {
 
             username = inputStream.readUTF();
 
-            System.out.println(username);
-
             User user = new User(chat.isEmpty() ? 1 : chat.usersLength() + 1, username);
 
             chat.addUser(user);
@@ -32,11 +31,9 @@ public class Connection implements Runnable {
             processMessage(inputStream, outputStream, user);
 
         } catch (IOException e) {
-            System.out.printf("%s\tConnection with %s was lost.   Socket is closed\n",
-                    Thread.currentThread().getName(), username);
+            log.error(Thread.currentThread().getName() + " -  Connection with " + username + " was lost.   Socket is closed\n");
         } catch (ClassNotFoundException e) {
-            System.out.printf("%s\tAn error occurred while object was read. Class was not found in the packages\n",
-                    Thread.currentThread().getName());
+            log.error(Thread.currentThread().getName() + " -  An error occurred while object was read. Class was not found in the packages\n");
         }
     }
 
@@ -50,12 +47,10 @@ public class Connection implements Runnable {
                 outputStream.flush();
                 chat.removeOutputStream(outputStream);
                 chat.removeUser(user);
-                System.out.printf("%s\tUser %s has left the Chat \n",
-                        Thread.currentThread().getName(), user.getNickname());
+                log.info(Thread.currentThread().getName() + " -  User " + user.getNickname() + " has left the Chat \n");
                 return;
             } else {
-                System.out.printf("%s\tMessage from %s: %s\n",
-                        Thread.currentThread().getName(), user.getNickname(), message);
+                log.info(Thread.currentThread().getName() + " -  Message from " + user.getNickname() + ":  " + message + "\n");
 
                 chat.sendMessage(message, outputStream);
             }

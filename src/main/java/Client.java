@@ -39,7 +39,7 @@ public class Client {
             Thread sender = new Thread(ms);
             Thread receiver = new Thread(mr);
 
-            System.out.print("======== Welcome to Chat ========\n");
+            System.out.print("–––––––– Welcome to Chat ––––––––\n");
             System.out.println("–– type \\exit to exit from chat and close the application. \n");
 
             sender.start();
