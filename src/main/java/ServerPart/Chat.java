@@ -1,3 +1,4 @@
+package ServerPart;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -8,7 +9,7 @@ public class Chat {
     private ArrayList<ObjectOutputStream> outputStreams = new ArrayList<>();
 
     public Chat () {
-        //Chat created
+        //ServerPart.Chat created
     }
 
     public void addUser(User newUser) {

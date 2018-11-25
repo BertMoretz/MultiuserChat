@@ -1,3 +1,5 @@
+package ClientPart;
+
 import java.io.*;
 import java.io.ObjectInputStream;
 import org.apache.log4j.Logger;
@@ -22,7 +24,7 @@ public class MessageReceiver implements Runnable {
                 }
                 System.out.println(message);
             } catch (EOFException e) {
-                log.error("Connection with the Server is lost.");
+                log.error("ServerPart.Connection with the ServerPart.Server is lost.");
                 return;
             } catch (IOException e) {
                 log.error("An error occurred while receiving the message.");
