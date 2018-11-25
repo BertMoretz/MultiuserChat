@@ -33,7 +33,7 @@ public class Connection implements Runnable {
             processMessage(inputStream, outputStream, user);
 
         } catch (IOException e) {
-            log.error(Thread.currentThread().getName() + " -  ServerPart.Connection with " + username + " was lost.   Socket is closed\n");
+            log.error(Thread.currentThread().getName() + " -  Connection with " + username + " was lost.   Socket is closed\n");
         } catch (ClassNotFoundException e) {
             log.error(Thread.currentThread().getName() + " -  An error occurred while object was read. Class was not found in the packages\n");
         }
@@ -49,7 +49,7 @@ public class Connection implements Runnable {
                 outputStream.flush();
                 chat.removeOutputStream(outputStream);
                 chat.removeUser(user);
-                log.info(Thread.currentThread().getName() + " -  ServerPart.User " + user.getNickname() + " has left the ServerPart.Chat \n");
+                log.info(Thread.currentThread().getName() + " -  User " + user.getNickname() + " has left the Chat \n");
                 return;
             } else {
                 log.info(Thread.currentThread().getName() + " -  Message from " + user.getNickname() + ":  " + message + "\n");

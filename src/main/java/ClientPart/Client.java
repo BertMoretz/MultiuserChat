@@ -19,14 +19,14 @@ public class Client {
         try {
             socket = new Socket("127.0.0.1", portNumber);
         } catch (IOException e) {
-            System.out.println("Cannot connect to ServerPart.Server. Please, try again");
+            System.out.println("Cannot connect to Server. Please, try again");
             return;
         }
 
         try (ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
              ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())) {
 
-            System.out.println("Welcome to the Public ServerPart.Chat Application");
+            System.out.println("Welcome to the Public Chat Application");
 
             Scanner in = new Scanner(System.in);
 
@@ -41,7 +41,7 @@ public class Client {
             Thread sender = new Thread(ms);
             Thread receiver = new Thread(mr);
 
-            System.out.print("–––––––– Welcome to ServerPart.Chat ––––––––\n");
+            System.out.print("–––––––– Welcome to Chat ––––––––\n");
             System.out.println("–– type \\exit to exit from chat and close the application. \n");
 
             sender.start();
@@ -51,7 +51,7 @@ public class Client {
             receiver.join();
 
         } catch (IOException e) {
-            System.out.println("Can't communicate with ServerPart.Server. ServerPart.Connection was lost");
+            System.out.println("Can't communicate with Server. Connection was lost");
         } catch (InterruptedException e) {
 
         }

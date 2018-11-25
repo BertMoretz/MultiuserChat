@@ -30,7 +30,7 @@ public class Server {
         while (true) {
             try {
                 Socket socket = serverSocket.accept();
-                System.out.println("New ServerPart.User Accepted  (" + socket + ") \n");
+                System.out.println("New User Accepted  (" + socket + ") \n");
 
                 Connection connection = new Connection(socket, chat);
 
