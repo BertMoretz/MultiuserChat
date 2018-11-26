@@ -2,14 +2,15 @@ package ServerPart;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.Vector;
 
-public class Chat {
-    private ArrayList<User> users = new ArrayList<>();
-    private ArrayList<ObjectOutputStream> outputStreams = new ArrayList<>();
+public class Chat implements Serializable{
+    private Vector<User> users = new Vector<>();
+    private Vector<ObjectOutputStream> outputStreams = new Vector<>();
 
     public Chat () {
-        //ServerPart.Chat created
+        //Chat created
     }
 
     public void addUser(User newUser) {
@@ -37,7 +38,7 @@ public class Chat {
     }
 
     public void sendMessage(String message, ObjectOutputStream outputStream) {
-        ArrayList<ObjectOutputStream> closedStreams = new ArrayList<>();
+        Vector<ObjectOutputStream> closedStreams = new Vector<>();
 
         String senderName = users.get(outputStreams.indexOf(outputStream)).getNickname();
         for (ObjectOutputStream oos : outputStreams) {

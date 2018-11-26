@@ -3,6 +3,8 @@ package ServerPart;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
+
 import org.apache.log4j.Logger;
 
 public class Accepter {
@@ -35,6 +37,13 @@ public class Accepter {
                 Thread connectionThread = new Thread(connection);
                 //connectionThread.setName("ServerPart.Connection-");
                 connectionThread.start();
+
+//                Scanner in = new Scanner(System.in);
+//                String command = in.next();
+//                if ("\\down".equals(command)) {     //to shut down the server
+//                    socket.close();
+//                    return;
+//                }
 
             } catch (IOException e) {
                 log.error("An error occurred! Please, try again! " + e.getMessage() + "\n");

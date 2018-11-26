@@ -31,7 +31,7 @@ public class ClientConnector {
 
             System.out.print("Enter your Nickname: ");
             String username = in.next();
-            outputStream.writeUTF(username);
+            outputStream.writeObject(username);
 
             System.out.println("Connecting to the chat...");
 
@@ -49,10 +49,12 @@ public class ClientConnector {
             sender.join();
             receiver.join();
 
+            socket.close();
         } catch (IOException e) {
             log.error("Can't communicate with Server. Connection was lost");
         } catch (InterruptedException e) {
-            log.error("An error occured! Please reconnect.");
+            log.error("An error occurred! Please reconnect.");
         }
+
     }
 }

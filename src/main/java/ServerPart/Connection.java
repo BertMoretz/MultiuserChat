@@ -23,7 +23,7 @@ public class Connection implements Runnable {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())) {
 
-            username = inputStream.readUTF();
+            username = (String) inputStream.readObject();
 
             User user = new User(chat.isEmpty() ? 1 : chat.usersLength() + 1, username);
 
