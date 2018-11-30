@@ -1,12 +1,9 @@
 package ServerPart;
 
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.Socket;
 import java.util.Arrays;
+import java.net.Socket;
 
-import Loader.JarLoader;
 import org.apache.log4j.Logger;
 
 public class Connection implements Runnable {
@@ -59,32 +56,15 @@ public class Connection implements Runnable {
             } else if (message.startsWith("\\")) {
                 String[] command = message.split(" "); // \command arg1 arg2 ...
                 String commandName = command[0].substring(1); // commandName = command
-                log.info(commandName);
-
-               JarLoader jl = new JarLoader("src/jars/");
-               Class cls = jl.findClass(commandName);
-
-               
-                try {
-                    Method[] compute = cls.getDeclaredMethods();
+                String[] commandArgs = Arrays.copyOfRange(command, 1, command.length); // arguments array
+                System.out.println(commandName);
 
 
-                    for (int i = 0; i < compute.length; i++) {
-                        System.out.println(compute[i].getName());
-                    }
-                    Method comp= cls.getMethod("compute", int.class);
-                    Object obj = cls.getConstructor().newInstance();
-                    System.out.println(comp.invoke(obj, Integer.parseInt(command[1])));
+                CommandProc cp = new CommandProc(commandName, commandArgs, outputStream, chat);
 
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                }
+                Thread commandProcessor = new Thread(cp);
+                commandProcessor.start();
+
             } else {
                 log.info(Thread.currentThread().getName() + " -  Message from " + user.getNickname() + ":  " + message + "\n");
 

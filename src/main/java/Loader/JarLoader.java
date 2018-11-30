@@ -1,5 +1,7 @@
 package Loader;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,6 +11,7 @@ import java.util.jar.JarFile;
 
 public class JarLoader extends ClassLoader {
 
+    private static final Logger log = Logger.getLogger(JarLoader.class);
     private String path;
 
     public JarLoader(String path) {
@@ -19,11 +22,10 @@ public class JarLoader extends ClassLoader {
     public Class<?> findClass(String name) throws ClassNotFoundException {
         try {
             JarFile jarLib = null;
-            String[] libFiles = new String[0];
 
             /* directory was specified */
             File dir = new File(path);
-            libFiles = dir.list();
+            String[] libFiles = dir.list();
 
 
             if (libFiles != null) {
@@ -45,10 +47,10 @@ public class JarLoader extends ClassLoader {
 
                 byte[] classBytes = new byte[(int) jarEntry.getSize()];
                 if (libInputStream.read(classBytes) != classBytes.length) {
-                    throw new IOException("Could not completely read the file " + path);
+                    log.error("Could not completely read the file " + path);
                 }
 
-                System.out.println("\tLoading class from " + jarLib.getName());
+                log.info("\tLoading class from " + jarLib.getName());
 
                 return defineClass(name.substring(0,1).toUpperCase() + name.substring(1), classBytes, 0, classBytes.length);
             }
@@ -56,10 +58,10 @@ public class JarLoader extends ClassLoader {
             throw new IOException();
 
         } catch (FileNotFoundException e) {
-            System.out.printf("Jar File %s is not found\n", path);
+            log.error("Jar File " + path + " is not found\n");
             throw new ClassNotFoundException(e.getMessage(), e);
         } catch (IOException e) {
-            System.out.printf("An error occurred while reading the lib path %s\n", path);
+            log.error("An error occurred while reading the path " + path + "\n");
             throw new ClassNotFoundException(e.getMessage(), e);
         }
     }

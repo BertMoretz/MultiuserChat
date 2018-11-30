@@ -54,4 +54,14 @@ public class Chat implements Serializable{
         }
         outputStreams.removeAll(closedStreams);
     }
+
+    public void sendCommandResults(String message, ObjectOutputStream outputStream) {
+        try {
+            outputStream.writeUTF("Result:\t" + message);
+            outputStream.flush();
+        } catch (IOException e) {
+                    // Socket was closed for that stream
+
+        }
+    }
 }
