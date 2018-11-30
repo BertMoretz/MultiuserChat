@@ -36,6 +36,7 @@ public class JarLoader extends ClassLoader {
                     }
                 }
             } else {
+                log.error("There are no files in this path");
                 throw new IOException();
             }
 
