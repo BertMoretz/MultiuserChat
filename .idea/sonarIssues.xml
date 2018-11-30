@@ -58,7 +58,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/CommandProc.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/CommandProcessor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/Connection.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/Factorial.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/Loader/CommandProc.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/Loader/JarLoader.java">
           <value>
             <set />
           </value>
@@ -89,6 +114,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/ServerPart/Connection.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/ServerPart/Listener.java">
           <value>
             <set />
           </value>
@@ -164,6 +194,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../Server/src/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/a.dummy">
           <value>
             <set />
           </value>

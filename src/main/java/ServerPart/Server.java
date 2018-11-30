@@ -3,7 +3,7 @@ package ServerPart;
 
 public class Server {
     public static void main(String[] args) {
-        int port = 9001;
+        int port = 9009;
 
         if (args.length != 1) {
             System.out.printf("Using default port number: %d\n", port);

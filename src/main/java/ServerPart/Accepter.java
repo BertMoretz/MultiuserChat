@@ -27,6 +27,10 @@ public class Accepter {
 
         Chat chat = new Chat();
 
+        Listener listener = new Listener(serverSocket);
+        Thread command = new Thread(listener);
+        command.start();
+
         while (true) {
             try {
                 Socket socket = serverSocket.accept();
@@ -38,15 +42,9 @@ public class Accepter {
                 //connectionThread.setName("ServerPart.Connection-");
                 connectionThread.start();
 
-//                Scanner in = new Scanner(System.in);
-//                String command = in.next();
-//                if ("\\down".equals(command)) {     //to shut down the server
-//                    socket.close();
-//                    return;
-//                }
-
             } catch (IOException e) {
                 log.error("An error occurred! Please, try again! " + e.getMessage() + "\n");
+                return;
             }
         }
     }
