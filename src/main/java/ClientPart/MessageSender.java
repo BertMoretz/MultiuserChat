@@ -1,3 +1,5 @@
+package ClientPart;
+
 import java.io.*;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;

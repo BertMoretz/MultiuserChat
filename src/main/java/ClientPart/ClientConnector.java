@@ -1,21 +1,22 @@
+package ClientPart;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
+import org.apache.log4j.Logger;
 
-public class Client {
+public class ClientConnector {
+    int port;
+    Socket socket;
+    private static final Logger log = Logger.getLogger(ClientConnector.class);
 
-    public static void main(String[] args) {
-        int portNumber = 9001;
-        if (args.length == 0) {
-            System.out.printf("Port number is not specified. Using default one: %d\n", portNumber);
-        } else {
-            portNumber = Integer.valueOf(args[0]);
-            System.out.printf("Using port number: %d\n", portNumber);
-        }
+    public ClientConnector(int port) {
+        this.port = port;
+    }
 
-        Socket socket;
+    public void connect() {
         try {
-            socket = new Socket("127.0.0.1", portNumber);
+            socket = new Socket("127.0.0.1", port);
         } catch (IOException e) {
             System.out.println("Cannot connect to Server. Please, try again");
             return;
@@ -30,7 +31,7 @@ public class Client {
 
             System.out.print("Enter your Nickname: ");
             String username = in.next();
-            outputStream.writeUTF(username);
+            outputStream.writeObject(username);
 
             System.out.println("Connecting to the chat...");
 
@@ -39,7 +40,7 @@ public class Client {
             Thread sender = new Thread(ms);
             Thread receiver = new Thread(mr);
 
-            System.out.print("======== Welcome to Chat ========\n");
+            System.out.print("–––––––– Welcome to Chat ––––––––\n");
             System.out.println("–– type \\exit to exit from chat and close the application. \n");
 
             sender.start();
@@ -48,10 +49,12 @@ public class Client {
             sender.join();
             receiver.join();
 
+            socket.close();
         } catch (IOException e) {
-            System.out.println("Can't communicate with Server. Connection was lost");
+            log.error("Can't communicate with Server. Connection was lost");
         } catch (InterruptedException e) {
-
+            log.error("An error occurred! Please reconnect.");
         }
+
     }
 }

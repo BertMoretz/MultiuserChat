@@ -1,12 +1,16 @@
+package ClientPart;
+
 import java.io.*;
 import java.io.ObjectInputStream;
+import org.apache.log4j.Logger;
 
 public class MessageReceiver implements Runnable {
 
     private ObjectInputStream inputStream;
 
+    private static final Logger log = Logger.getLogger(MessageReceiver.class);
     public MessageReceiver(ObjectInputStream inputStream) {
-        this.inputStream = inputStream;
+            this.inputStream = inputStream;
     }
 
     @Override
@@ -20,9 +24,10 @@ public class MessageReceiver implements Runnable {
                 }
                 System.out.println(message);
             } catch (EOFException e) {
-                System.out.println("Connection with the Server is lost.");
+                log.error("Connection with the Server is lost.");
+                return;
             } catch (IOException e) {
-                System.out.println("An error occurred while receiving the message.");
+                log.error("An error occurred while receiving the message.");
             }
         }
     }
