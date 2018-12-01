@@ -32,17 +32,14 @@ public class CommandProc implements  Runnable {
 
         try {
             cls = jl.findClass(name);
-        } catch (ClassNotFoundException e) {
-            log.error("There is no class ———  " + name + "\n");
-            result = "No such command";
-        }
 
-        try {
             Method comp= cls.getMethod("compute", String[].class);
             Object obj = cls.getConstructor().newInstance();
             result = (String) comp.invoke(obj,  new Object[]{args});
             System.out.println(result);
-
+        } catch (ClassNotFoundException e) {
+            log.error("There is no class ———  " + name + "\n");
+            result = "No such command";
         } catch (NoSuchMethodException e) {
             result = "Wrong Arguments passed";
             log.error("Wrong Arguments passed");
@@ -53,6 +50,7 @@ public class CommandProc implements  Runnable {
         } catch (InstantiationException e) {
             log.error("Can't instantiate object of class " + cls.getName() + "\n");
         }
+
 
         chat.sendCommandResults(result, sender);
     }

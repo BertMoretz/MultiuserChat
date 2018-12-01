@@ -10,7 +10,7 @@ public class MessageReceiver implements Runnable {
 
     private static final Logger log = Logger.getLogger(MessageReceiver.class);
     public MessageReceiver(ObjectInputStream inputStream) {
-        this.inputStream = inputStream;
+            this.inputStream = inputStream;
     }
 
     @Override
